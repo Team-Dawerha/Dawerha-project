@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1068717094451",
+    "project_id": "dwwerha",
+    "storage_bucket": "dwwerha.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068717094451:android:bca2f1a3a244a52de5d546",
+        "android_client_info": {
+          "package_name": "com.example.dawerha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068717094451-d17tr2nfoon5ffo9u6hlkffqgbjg1ln6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrTqaJ1f3y_hzlLd-IFbTMrrONxZAYg8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068717094451-d17tr2nfoon5ffo9u6hlkffqgbjg1ln6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
