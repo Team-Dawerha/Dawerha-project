@@ -9,8 +9,6 @@ import 'package:dawerha/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'RegisterScreen.dart';
-
 class Log extends StatefulWidget {
   Log({Key key}) : super(key: key);
 
@@ -123,8 +121,21 @@ class _LogState extends State<Log> {
       var _user = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (_user != null) {
+        print(_user.user.uid);
+        _firestore.collection("HomeOwnerUser")
+          ..where('id', isEqualTo: _user.user.uid)
+              .snapshots()
+              .listen((data) async {
+            await setId(data.docs.first.data()["id"]);
+            await setName(data.docs.first.data()["name"]);
+            await setEmail(data.docs.first.data()["email"]);
+          });
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Home();
+        }));
+        /*
         await _firestore
-            .collection('Users')
+            .collection('HomeOwnerUser')
             .where("id", isEqualTo: _user.user.uid)
             .get()
             .then((value) {
@@ -137,8 +148,12 @@ class _LogState extends State<Log> {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Home();
             }));
+          } else {
+            showToast(context, 'لا يمكن العثور على المستخدم');
+            return;
           }
         });
+        **/
       } else {
         showToast(context, 'البريد الالكتروني أو كلمة المرور خاطئ');
       }

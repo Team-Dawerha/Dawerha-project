@@ -22,7 +22,7 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
   Completer<GoogleMapController> _controller = Completer();
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
-  int markers_index = 1;
+  int markersIndex = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,7 +113,7 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
   }
 
   void addMarker(double lat, double lng) {
-    final MarkerId markerId = MarkerId(markers_index.toString());
+    final MarkerId markerId = MarkerId(markersIndex.toString());
 
     // creating a new MARKER
     final Marker marker = Marker(
@@ -127,6 +127,6 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
       // adding a new marker to map
       markers[markerId] = marker;
     });
-    markers_index++;
+    markersIndex++;
   }
 }

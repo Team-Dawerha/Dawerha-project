@@ -1,3 +1,5 @@
+import 'package:dawerha/Utils/BaseFunctions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -49,7 +51,12 @@ class MyDrawer extends StatelessWidget {
             title: Text("طلب جديد"),
             leading: Icon(Icons.car_repair, color: Colors.green),
             onTap: () {
-              print("tap");
+              var _firebaseAuth = FirebaseAuth.instance;
+              if (_firebaseAuth.currentUser != null) {
+                Navigator.of(context).pushNamed("create_order");
+              } else {
+                showToast(context, 'يجب عليك تسجيل الدخول أولا');
+              }
             },
           ),
           ListTile(

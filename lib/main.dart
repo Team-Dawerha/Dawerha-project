@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:dawerha/screens/ForgotPassword.dart';
+import 'package:dawerha/screens/HomeOwnerScreens/HomeOwnerCreateOrderScreen.dart';
 import 'package:dawerha/screens/RegisterScreen.dart';
 import 'package:dawerha/screens/introScreen.dart';
 import 'package:dawerha/screens/login.dart';
@@ -34,6 +33,9 @@ class MyApp extends StatelessWidget {
         },
         "reset": (context) {
           return ForgotPassword();
+        },
+        "create_order": (context) {
+          return HomeOwnerCreateOrderScreen();
         }
       },
     ); //End

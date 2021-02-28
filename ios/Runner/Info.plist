@@ -45,5 +45,10 @@
 	<YES/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location when open.</string>
+	<string>This app needs access to gallery when open.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>This app needs access to camera when open.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app needs access to microphone when open.</string>
 </dict>
 </plist>

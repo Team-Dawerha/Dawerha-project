@@ -19,10 +19,11 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool isLocationSelected = false;
-  double selected_lat = 0.0;
-  double selected_lng = 0.0;
+  double selectedLat = 0.0;
+  double selectedLng = 0.0;
   String fullName = '';
-  String phoneNumber = '';
+  String firstPhoneNumber = '';
+  String secondPhoneNumber = '';
   String email = '';
   String password = '';
   bool isLoading = false;
@@ -54,9 +55,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             LoginField(
               keyboardType: TextInputType.phone,
-              hint: 'رقم الجوال',
+              hint: 'رقم الجوال الأول',
               onChange: (v) {
-                phoneNumber = v;
+                firstPhoneNumber = v;
+              },
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            LoginField(
+              keyboardType: TextInputType.phone,
+              hint: 'رقم الجوال الثاني',
+              onChange: (v) {
+                secondPhoneNumber = v;
               },
             ),
             SizedBox(
@@ -105,8 +116,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         setState(() {
                           isLocationSelected = true;
                         });
-                        selected_lat = value[0];
-                        selected_lng = value[1];
+                        selectedLat = value[0];
+                        selectedLng = value[1];
                       });
                     }
                   } catch (e) {}
@@ -128,15 +139,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             NewButton(
               onPressed: () async {
-                if (fullName.isEmpty) {
+                if (fullName == '') {
                   showToast(context, 'يجب عليك كتابة اسمك الكامل');
                   return;
                 }
-                if (phoneNumber.isEmpty) {
-                  showToast(context, 'يجب عليك كتابة رقم الجوال');
+                if (firstPhoneNumber == '') {
+                  showToast(context, 'يجب عليك كتابة رقم الجوال الأول');
                   return;
                 }
-                if (email.isEmpty) {
+                if (secondPhoneNumber == '') {
+                  showToast(context, 'يجب عليك كتابة رقم الجوال الثاني');
+                  return;
+                }
+                if (email == '') {
                   showToast(context, 'يجب عليك كتابة البريد الإلكتروني');
                   return;
                 }
@@ -168,15 +183,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final newUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (newUser != null) {
+        await _firestore.collection('HomeOwnerUser').add({
+          'id': newUser.user.uid,
+          'name': fullName,
+          'phone1': firstPhoneNumber,
+          'phone2': secondPhoneNumber,
+          'email': email
+        });
+        DocumentReference d1 = _firestore.collection('Addresses').doc();
+        await _firestore.collection('Addresses').doc(d1.id).set({
+          'id': d1.id,
+          'lat': selectedLat,
+          'lng': selectedLng,
+          'user_id': newUser.user.uid
+        });
+        /*
         await _firestore.collection('Users').add({
           'id': newUser.user.uid,
           'full_name': fullName,
           'phone_number': phoneNumber,
           'email': email,
           'password': password,
-          'lat': selected_lat,
-          'lng': selected_lng
+          'lat': selectedLat,
+          'lng': selectedLng
         });
+        **/
         showToast(context, 'تم إنشاء الحساب بنجاح');
         setId(newUser.user.uid);
         setName(fullName);

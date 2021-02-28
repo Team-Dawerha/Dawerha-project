@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
 
 const logoStyle =
     TextStyle(color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold);
