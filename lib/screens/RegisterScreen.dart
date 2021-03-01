@@ -4,13 +4,13 @@ import 'package:dawerha/Utils/colors.dart';
 import 'package:dawerha/Utils/styles.dart';
 import 'package:dawerha/Widgets/LoginField.dart';
 import 'package:dawerha/Widgets/NewButton.dart';
-import 'package:dawerha/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'PickLocationScreen.dart';
+import 'package:dawerha/screens/HomeOwnerScreens/HomeOwnerCreateOrderScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -213,7 +213,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         setName(fullName);
         setEmail(email);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Home();
+          return HomeOwnerCreateOrderScreen();
         }));
       } else {
         showToast(context, 'الرجاء التأكد من البيانات');
