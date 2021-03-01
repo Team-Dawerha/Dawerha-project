@@ -5,9 +5,9 @@ import 'package:dawerha/Utils/styles.dart';
 import 'package:dawerha/Widgets/AppLogo.dart';
 import 'package:dawerha/Widgets/LoginField.dart';
 import 'package:dawerha/Widgets/NewButton.dart';
-import 'package:dawerha/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:dawerha/screens/HomeOwnerScreens/HomeOwnerCreateOrderScreen.dart';
 
 class Log extends StatefulWidget {
   Log({Key key}) : super(key: key);
@@ -131,7 +131,7 @@ class _LogState extends State<Log> {
             await setEmail(data.docs.first.data()["email"]);
           });
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Home();
+          return HomeOwnerCreateOrderScreen();
         }));
         /*
         await _firestore
